@@ -15,22 +15,22 @@ def FFT(P):
     #Pe = [p for i,p in enumerate(P) if i%2==0]
     #Po = [p for i,p in enumerate(P) if i%2==1]
     Pe, Po = P[::2], P[1::2]
-    ye,yo = FFT(Pe), FFT(Po)
+    ye, yo = FFT(Pe), FFT(Po)
     
     y = [0]*n
     
     for j in range(int(n/2)):
         y[j] = ye[j] + w**j*yo[j]
         y[j+int(n/2)] = ye[j] - w**j*yo[j]
-        print(j,'y =',y)
+        print(j,'y =', y)
     if debug:
         print('w:',w)
         print('Pe :',Pe,',Po :',Po)
         print('ye :',ye,'\nyo :',yo,'\n')
     return y
  
-y = FFT(P) 
-print('FFT(P) =',y)
+fft = FFT(P) 
+print('FFT(P) =', fft, len(fft))
 
 
 def IFFT(P):
@@ -41,7 +41,7 @@ def IFFT(P):
         return P
     w = 1/n*exp(-2*pi*1j/n)
     Pe, Po = P[::2], P[1::2]
-    ye,yo = IFFT(Pe), IFFT(Po)
+    ye, yo = IFFT(Pe), IFFT(Po)
     
     y = [0]*n
     for j in range(int(n/2)):
@@ -53,6 +53,6 @@ def IFFT(P):
         print('ye:',ye,'\nyo:',yo,'\n')
     return y
 
-Y = IFFT(y)
-print('Y=', Y)
-print('IFFT(P)=',[v.real for v in Y])
+ifft = IFFT(fft)
+print('IFFT =', ifft, len(ifft))
+print('IFFT(P)=',[v.real for v in ifft])

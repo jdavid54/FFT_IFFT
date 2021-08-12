@@ -11,7 +11,7 @@ def DFT(n): # discreet fourier transform matrix
     for i in range(n):
         for j in range(n):
             #print(i*j,w**(i*j))
-            m[i][j] = np.round(w**(i*j))
+            m[i][j] = w**(i*j)
     return m
 
 print('Discreet fourier transform matrix :\n',DFT(4))

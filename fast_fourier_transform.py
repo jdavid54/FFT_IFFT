@@ -48,7 +48,7 @@ def IFFT(P):
     print('n :',n)
     if n == 1: # base case
         return P
-    w = 1/n*exp(-2*pi*1j/n)
+    w = exp(-2*pi*1j/n)
     Pe, Po = P[::2], P[1::2]
     ye, yo = IFFT(Pe), IFFT(Po)
     
@@ -62,6 +62,7 @@ def IFFT(P):
         print('ye:',ye,'\nyo:',yo,'\n')
     return y
 
-ifft = IFFT(fft)
+# division by n must be out of function IFFT because of recursive side effect 
+ifft = [v/len(fft) for v in IFFT(fft)]
 print('IFFT =', ifft, len(ifft))
 print('IFFT(P)=',[v.real for v in ifft])

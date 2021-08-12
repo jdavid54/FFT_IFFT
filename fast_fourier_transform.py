@@ -5,15 +5,7 @@ P = [1, 2, 0, 6, 1, 0, 0, 0]   # y = 1 + 2x + 6x**3 + x**4
 P = [0, 0, 1, 0]  # y = x**2
 debug = False
 
-def DFT(n): # discreet fourier transform matrix
-    m = np.zeros((n,n),complex)
-    w = exp(2*pi*1j/n)
-    for i in range(n):
-        for j in range(n):
-            m[i][j] = np.round(w**j)
-    return m
 
-print('Discreet fourier transform matrix :',DFT(4))
 
 def FFT(P):
     # P is a polynomial with [p0,p1,...p(n-1)] as coeff representation

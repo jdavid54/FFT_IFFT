@@ -26,20 +26,26 @@ def iDFT(n): # discreet fourier transform inverse matrix
 
 def FFT(P):
     # P is a polynomial with [p0,p1,...p(n-1)] as coeff representation
-    n = len(P)  # n is a power of 2
+    n = len(P)  # n must be a power of 2
+     
     if debug: print('n :',n)
     if n==1:
         return P
     w = exp(2*pi*1j/n)
-    #Pe = [p for i,p in enumerate(P) if i%2==0]
-    #Po = [p for i,p in enumerate(P) if i%2==1]
     Pe, Po = P[::2], P[1::2]
     ye, yo = FFT(Pe), FFT(Po)
     
     y = [0]*n
+    # see t=19:52 youtube https://www.youtube.com/watch?v=h7apO7q16V0
+    # P(x_j) = Pe(x_j**2) + x_j * Po(x_j**2)
+    # P(-x_j) = Pe(x_j**2) - x_j * Po(x_j**2)
+    # with j in [0, 1, ...., n/2-1]
     
+    # paired points
+    # x_j = w**j => P(x_j) = y[j]
+    # -x_j = w**(j+n/2) => P(-x_j) = y[j+n/2]
     for j in range(int(n/2)):
-        y[j] = ye[j] + w**j*yo[j]
+        y[j] = ye[j] + w**j * yo[j]  
         y[j+int(n/2)] = ye[j] - w**j*yo[j]
         if debug: print(j,'y =', y)
     if debug:
@@ -50,8 +56,9 @@ def FFT(P):
  
 
 def IFFT(P):
-    # P is a polynomial with [P(w**0),P(w**1),...,P(w**n-1)] as value representation
-    n = len(P)
+    # P is a polynomial with [P(w0),P(w1),...,P(w_n-1)] as value representation
+    n = len(P)  # n must be a power of 2
+    
     if debug: print('n :',n)
     if n == 1: # base case
         return P
@@ -124,4 +131,4 @@ if __name__ == "__main__":
     # by IFFT
     print(np.round(np.dot(idft, fft),2))
     # by iDFT matrix
-    print('compare ifft and idft product:\n',np.round(ifft,2)==np.round(np.dot(idft, fft),2))  # ok
+    print('compare ifft and idft matrix product:\n',np.round(ifft,2)==np.round(np.dot(idft, fft),2))  # ok

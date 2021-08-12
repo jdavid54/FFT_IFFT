@@ -23,8 +23,6 @@ def FFT(P):
     if n==1:
         return P
     w = exp(2*pi*1j/n)
-    #Pe = [p for i,p in enumerate(P) if i%2==0]
-    #Po = [p for i,p in enumerate(P) if i%2==1]
     Pe, Po = P[::2], P[1::2]
     ye, yo = FFT(Pe), FFT(Po)
     

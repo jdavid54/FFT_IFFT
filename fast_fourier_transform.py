@@ -60,9 +60,9 @@ def IFFT(P):
         print('n:',n,',w:',w)
         print('Pe:',Pe,',Po:',Po)
         print('ye:',ye,'\nyo:',yo,'\n')
-    return y
+    return np.array(y)
 
 # division by n must be out of function IFFT because of recursive side effect 
-ifft = [v/len(fft) for v in IFFT(fft)]
+ifft = 1/len(fft) * IFFT(fft)
 print('IFFT =', ifft, len(ifft))
 print('IFFT(P)=',[v.real for v in ifft])

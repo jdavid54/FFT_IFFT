@@ -65,4 +65,4 @@ def IFFT(P):
 # division by n must be out of function IFFT because of recursive side effect 
 ifft = 1/len(fft) * IFFT(fft)
 print('IFFT =', ifft, len(ifft))
-print('IFFT(P)=',[v.real for v in ifft])
+print('IFFT(P)=', ifft.real)

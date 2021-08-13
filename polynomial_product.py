@@ -1,5 +1,6 @@
 import numpy as np
 
+# polynomials in coefficient representations
 P0 = [0, 0, 1, 1]
 P1 = [0,1,3]
 P2 = [1,1,3]

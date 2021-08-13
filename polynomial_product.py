@@ -36,6 +36,30 @@ mul(P2,P3)
 mul(P4,P2)
 mul(P2,P4)
 mul(P1,P5)
-
 mul(P0,P1)
 mul(P1,P0)
+
+def mul2(P1, P2):
+    # convert to multiplication of integers and return in form of coefficient representation
+    ops = 0
+    p1 = [i*10**k for k,i in enumerate(P1) if i!=0]
+    ops += len(p1)
+    n1 = sum(p1)
+    ops += len(p1)-1
+    p2 = [i*10**k for k,i in enumerate(P2) if i!=0]
+    ops += len(p2)
+    n2 = sum(p2)
+    ops += len(p2)-1
+    #print(p1,p2)
+    p = [int(i) for i in str(n1*n2)]
+    p.reverse()    
+    print(p, ops,'ops')
+    return p
+
+
+print()
+mul2(P4,P2)
+mul2(P2,P4)
+mul2(P1,P5)
+mul2(P0,P1)
+mul2(P1,P0)
